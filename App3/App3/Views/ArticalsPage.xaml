@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodel="clr-namespace:App3.ViewModel" xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="App3.Views.ArticalsPage"
+             Title="Articals">
+    
+    <ContentPage.BindingContext>
+        <viewmodel:ArticalsViewModel/>
+    </ContentPage.BindingContext>
+    
+    <!--<ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="search.png"/>
+    </ContentPage.ToolbarItems>-->
+    
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout IsVisible="{Binding isArticalSelected}">
+                <CollectionView SelectionMode="Single"
+                            ItemsSource="{Binding articals, Mode=TwoWay}" Margin="10" SelectedItem="{Binding selectedArticals}"
+                            SelectionChangedCommand="{Binding SelectedArticalCommand}" SelectionChangedCommandParameter="{Binding .}">
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <ContentView>
+                                <Frame BackgroundColor="White" HasShadow="True" OutlineColor="White" Margin="0,0,0,17" Padding="0">
+
+                                    <Grid RowSpacing="17" ColumnSpacing="0">
+
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+
+                                        </Grid.RowDefinitions>
+
+                                        <Image Source="{Binding urlToImage}" Grid.Row="0" HorizontalOptions="FillAndExpand"/>
+                                        <StackLayout Margin="10,0,10,0" Grid.Row="1" >
+                                            <Label Text="{Binding title}" FontSize="Large"/>
+
+                                            <Label Text="{Binding author, StringFormat='By {0}'}"/>
+                                        </StackLayout>
+                                       
+                                        <Label Text="{Binding publishedAt, StringFormat='{0:MMMM d, yyyy}'}" Grid.Row="3" HorizontalOptions="EndAndExpand" Margin="0,0,15,10"/>
+                                    </Grid>
+                                </Frame>
+                            </ContentView>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+
+            </StackLayout>
+
+            <Grid IsVisible="{Binding IsLoading}"
+              VerticalOptions="FillAndExpand"
+              BackgroundColor="#66666666">
+                <ActivityIndicator IsRunning="{Binding IsLoading}"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center" 
+                                    Color="Blue"/>
+            </Grid>
+        </StackLayout>
+        
+        
+        
+    </ContentPage.Content>
+</ContentPage>

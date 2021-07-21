@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodel="clr-namespace:App3.ViewModel"
+                  x:Class="App3.Views.MasterPage"
+                   Title="Menu">
+
+    <MasterDetailPage.BindingContext>
+        <viewmodel:MasterDetailsViewModel/>
+    </MasterDetailPage.BindingContext>
+    
+    <MasterDetailPage.Master>
+
+        <ContentPage Title="Menu">
+            <Grid Margin="20">
+                <Grid BackgroundColor="Transparent" Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
+                    <StackLayout Orientation="Horizontal" Grid.Row="0">
+                        <Image Source="profile.png" WidthRequest="70" HeightRequest="70"/>
+                        <StackLayout VerticalOptions="CenterAndExpand">
+                            <Label Text="Welcome" FontSize="Small"/>
+                            <Label Text="Tony Roshidy" FontSize="Body" TextColor="Black"/>
+                        </StackLayout>
+                    </StackLayout>
+                    
+                    <ListView ItemsSource="{Binding sectionNames}" Grid.Row="1" SeparatorVisibility="None" ItemSelected="ListView_ItemSelected">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Image Source="{Binding icon}" WidthRequest="20" HeightRequest="20"/>
+                                        <Label Text="{Binding name}" VerticalTextAlignment="Center"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                </Grid>
+        </Grid>
+
+        </ContentPage>
+
+    </MasterDetailPage.Master>
+</MasterDetailPage>
